@@ -7,6 +7,9 @@
 # Starter Content
 Content/StarterContent/*
 
+# Objects
+Objects/*
+
 # Compiled Object files
 *.slo
 *.lo
