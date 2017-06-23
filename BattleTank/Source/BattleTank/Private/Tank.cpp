@@ -15,6 +15,8 @@ ATank::ATank()
 
 	// No need to protect points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+
+	auto test = FPlatformTime::Seconds();
 }
 
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
