@@ -9,6 +9,7 @@
 // Foward declarations
 class UTankBarrel;
 class UTankAimingComponent;
+class UTankMovementComponent;
 class UTankTurret;
 class AProjectile;
 
@@ -30,8 +31,12 @@ public:
 	void Fire();
 
 protected:
+	
 	UTankAimingComponent* TankAimingComponent = nullptr;
-
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input)
+	UTankMovementComponent* TankMovementComponent = nullptr;
+	
 private:
 	// Sets default values for this pawn's properties
 	ATank();
