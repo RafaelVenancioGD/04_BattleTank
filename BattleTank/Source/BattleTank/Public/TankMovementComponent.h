@@ -21,6 +21,11 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void IntendMoveFoward(float Throw);
+
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void IntendTurnRight(float Throw);
+
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 	
 private:
 
