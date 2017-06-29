@@ -1,4 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Scaleno LTD.
+
 
 #include "BattleTank.h"
 #include "TankTrack.h"
@@ -6,24 +7,25 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
-	if (!LeftTrackToSet || !RightTrackToSet) { return; }
-
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
-
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
-	// No need to call super as we are replacing the functionality 
+	// No need to call Super as we're replacing the functionality
+
+	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+
+	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
+
 	
-	auto TankFoward = GetOwner()->GetActorForwardVector().GetSafeNormal();
-	auto AIFowardIntention = MoveVelocity.GetSafeNormal();
-	auto FowardThrow = FVector::DotProduct(TankFoward, AIFowardIntention);
 
-	IntendMoveFoward(FowardThrow);
-	//UE_LOG(LogTemp, Warning, TEXT("%s Vectoring to %s"), *TankName, *MoveVelocityString);
-
+	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	IntendMoveFoward(ForwardThrow);
+	IntendTurnRight(RightThrow);
+	//	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString)
 }
 
 void UTankMovementComponent::IntendMoveFoward(float Throw)
@@ -32,7 +34,7 @@ void UTankMovementComponent::IntendMoveFoward(float Throw)
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 
-	//TODO Prevent double speed due to double input
+	// TODO prevent double-speed due to dual control use
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw)
@@ -41,6 +43,5 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 
-	//TODO Prevent double speed due to double input
+	// TODO prevent double-speed due to dual control use
 }
-

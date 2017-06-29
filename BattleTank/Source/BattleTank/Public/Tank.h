@@ -32,9 +32,10 @@ public:
 
 protected:
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input")
 	UTankAimingComponent* TankAimingComponent = nullptr;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input")
 	UTankMovementComponent* TankMovementComponent = nullptr;
 	
 private:
