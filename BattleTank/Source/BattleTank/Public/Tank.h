@@ -27,9 +27,11 @@ private:
 	
 	ATank();
 
+	virtual void BeginPlay() override;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	int32 StartingHealth = 100;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	int32 CurrentHealth = StartingHealth;
+	int32 CurrentHealth; // Not initialize in begin play
 };
